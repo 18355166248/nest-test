@@ -12,7 +12,7 @@ import { PhotoService } from './photo.service';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { UpdatePhotoDto } from './dto/update-photo.dto';
 import { FindAllProps } from './photo.types';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('photo')
 @ApiTags('相册')
@@ -25,6 +25,9 @@ export class PhotoController {
   }
 
   @Get()
+  @ApiQuery({ name: 'name', description: '名称', required: false })
+  @ApiQuery({ name: 'pageNo', description: '页' })
+  @ApiQuery({ name: 'pageSize', description: '分页数' })
   findAll(@Query() query: FindAllProps) {
     console.log('query', query);
     return this.photoService.findAll(query);

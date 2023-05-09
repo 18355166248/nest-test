@@ -28,7 +28,7 @@ export class PhotoService {
       order: {
         id: 'DESC',
       },
-      skip: (query.pageNo - 1) * query.pageSize,
+      skip: (query.pageNo - 1) * query.pageSize || 0,
       take: query.pageSize,
     });
     console.log(data);
