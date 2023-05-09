@@ -9,10 +9,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log(typeof id);
-    return id;
-  }
 }
