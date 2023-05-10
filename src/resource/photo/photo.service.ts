@@ -12,6 +12,18 @@ export class PhotoService {
     @InjectRepository(Photo) private readonly photo: Repository<Photo>,
   ) {}
 
+  async _create(createPhotoDto: CreatePhotoDto) {
+    const p = new Photo();
+    p.name = createPhotoDto.name;
+    p.description = createPhotoDto.description;
+    p.filename = createPhotoDto.filename;
+    try {
+      return await this.photo.save(p);
+    } catch (error) {
+      return error;
+    }
+  }
+
   async create(createPhotoDto: CreatePhotoDto) {
     const p = new Photo();
     p.name = createPhotoDto.name;

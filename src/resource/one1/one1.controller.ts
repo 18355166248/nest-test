@@ -20,9 +20,19 @@ export class One1Controller {
     return this.one1Service.create(createOne1Dto);
   }
 
+  @Post('photos')
+  createWithPhotos(@Body() createOne1Dto: CreateOne1Dto) {
+    return this.one1Service.createWithPhoto(createOne1Dto);
+  }
+
   @Get()
   findAll() {
     return this.one1Service.findAll();
+  }
+
+  @Get('photos')
+  findAllWithPhtots() {
+    return this.one1Service.findAllWithPhtots();
   }
 
   @Get(':id')

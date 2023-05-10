@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { One1 } from 'src/resource/one1/entities/one1.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Photo {
@@ -10,9 +11,18 @@ export class Photo {
   })
   name: string;
 
-  @Column('text')
+  @Column({
+    type: 'text',
+    default: null,
+  })
   description: string;
 
-  @Column()
+  @Column({
+    type: 'text',
+    default: null,
+  })
   filename: string;
+
+  @ManyToOne(() => One1, (one1) => one1.photos)
+  one1: One1;
 }
