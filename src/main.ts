@@ -8,8 +8,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new HttpResponseInterceptor());
-  // app.useGlobalFilters(new HttpFilterFilter());
-  // app.useGlobalPipes(new PiTestPipe());
+  app.useGlobalFilters(new HttpFilterFilter());
+  app.useGlobalPipes(new PiTestPipe());
 
   const options = new DocumentBuilder()
     .addBearerAuth()

@@ -29,7 +29,6 @@ export class PhotoController {
   @ApiQuery({ name: 'pageNo', description: '页' })
   @ApiQuery({ name: 'pageSize', description: '分页数' })
   findAll(@Query() query: FindAllProps) {
-    console.log('query', query);
     return this.photoService.findAll(query);
   }
 
