@@ -10,13 +10,18 @@ import {
 import { One1Service } from './one1.service';
 import { CreateOne1Dto } from './dto/create-one1.dto';
 import { UpdateOne1Dto } from './dto/update-one1.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('one1')
 export class One1Controller {
-  constructor(private readonly one1Service: One1Service) {}
+  constructor(
+    private readonly one1Service: One1Service,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Post()
   create(@Body() createOne1Dto: CreateOne1Dto) {
+    console.log(11, this.configService.get('db'));
     return this.one1Service.create(createOne1Dto);
   }
 

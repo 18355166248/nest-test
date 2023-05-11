@@ -12,6 +12,6 @@ export class CreateOne1Dto {
   name: string;
 
   // photo 多
-  @IsArray()
+  // @IsArray()
   photos: Photo[];
 }

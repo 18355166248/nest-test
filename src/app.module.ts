@@ -11,9 +11,22 @@ import { One1Module } from './resource/one1/one1.module';
 import { One2Module } from './resource/one2/one2.module';
 import { One1 } from './resource/one1/entities/one1.entity';
 import { One2 } from './resource/one2/entities/one2.entity';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './configuration';
+import * as Joi from 'joi';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string()
+          .valid('development', 'production')
+          .default('development'),
+        PORT: Joi.number().default(3000),
+      }),
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
