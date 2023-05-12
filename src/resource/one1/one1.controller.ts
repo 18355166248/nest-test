@@ -21,7 +21,6 @@ export class One1Controller {
 
   @Post()
   create(@Body() createOne1Dto: CreateOne1Dto) {
-    console.log(11, this.configService.get('db'));
     return this.one1Service.create(createOne1Dto);
   }
 

@@ -3,9 +3,8 @@ http:
   port: 8080
 
 db:
-  postgres:
-    url: 'localhost'
-    port: 3306
-    database: 'demo'
-    username: 'root'
-    password: '511871901'
+  host: 'localhost'
+  port: 3306
+  database: 'demo'
+  username: 'root'
+  password: '511871901'

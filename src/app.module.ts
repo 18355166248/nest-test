@@ -11,7 +11,7 @@ import { One1Module } from './resource/one1/one1.module';
 import { One2Module } from './resource/one2/one2.module';
 import { One1 } from './resource/one1/entities/one1.entity';
 import { One2 } from './resource/one2/entities/one2.entity';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './configuration';
 import * as Joi from 'joi';
 
@@ -27,15 +27,27 @@ import * as Joi from 'joi';
         PORT: Joi.number().default(3000),
       }),
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3307,
-      username: 'root',
-      password: '511871901',
-      database: 'mysql', // 表名
-      entities: [Test, Photo, One1, One2],
-      synchronize: true, // 确保每次运行应用程序时实体都将与数据库同步
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('db.host'),
+        port: +configService.get('db.port'),
+        username: configService.get('db.username'),
+        password: configService.get('db.password'),
+        database: configService.get('db.database'),
+        entities: [Test, Photo, One1, One2],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
+      // type: 'mysql',
+      // host: '127.0.0.1',
+      // port: 3307,
+      // username: 'root',
+      // password: '511871901',
+      // database: 'mysql', // 表名
+      // entities: [Test, Photo, One1, One2],
+      // synchronize: true, // 确保每次运行应用程序时实体都将与数据库同步
     }),
     TestModule,
     UserModule,

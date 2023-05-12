@@ -1,11 +1,10 @@
 http:
-  host: '192.168.0.1'
+  host: '127.0.0.1'
   port: 8080
 
 db:
-  postgres:
-    url: '192.168.0.1'
-    port: 3306
-    database: 'development'
-    username: 'root'
-    password: '511871901'
+  host: '127.0.0.1'
+  port: 3307
+  database: 'mysql'
+  username: 'root'
+  password: '511871901'
