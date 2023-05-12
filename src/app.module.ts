@@ -29,11 +29,11 @@ import * as Joi from 'joi';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
+      host: '127.0.0.1',
+      port: 3307,
       username: 'root',
       password: '511871901',
-      database: 'demo',
+      database: 'mysql', // 表名
       entities: [Test, Photo, One1, One2],
       synchronize: true, // 确保每次运行应用程序时实体都将与数据库同步
     }),
