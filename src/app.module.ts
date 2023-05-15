@@ -14,9 +14,11 @@ import { One2 } from './resource/one2/entities/one2.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './configuration';
 import * as Joi from 'joi';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
+    LoggerModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
@@ -38,6 +40,7 @@ import * as Joi from 'joi';
         database: configService.get('db.database'),
         entities: [Test, Photo, One1, One2],
         synchronize: true,
+        logging: ['error', 'log'],
       }),
       inject: [ConfigService],
       // type: 'mysql',
