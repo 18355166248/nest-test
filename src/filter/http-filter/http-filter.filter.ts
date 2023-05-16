@@ -18,15 +18,13 @@ interface CommonResponseProps {
 @Catch()
 export class HttpFilterFilter<T> implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
-    console.log('exception', exception);
     const ctx = host.switchToHttp();
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
-    const exceptionRes = exception.getResponse();
-
+    const exceptionRes = exception.getResponse() as any;
     const res: CommonResponseProps = {
-      data: 500, // 错误码
+      data: exceptionRes.message, // 错误码
       time: Date.now(),
       success: false,
       path: request.url,

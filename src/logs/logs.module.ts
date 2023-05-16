@@ -24,6 +24,17 @@ import 'winston-daily-rotate-file';
             }),
           ),
         });
+        const consoleErrorTransports = new winston.transports.Console({
+          level: 'error',
+          format: winston.format.combine(
+            winston.format.timestamp(),
+            winston.format.ms(),
+            nestWinstonModuleUtilities.format.nestLike('SMegalo', {
+              colors: true,
+              prettyPrint: true,
+            }),
+          ),
+        });
         const dailyWarnTransports = new winston.transports.DailyRotateFile({
           level: 'warn',
           dirname: 'logs',
@@ -53,6 +64,7 @@ import 'winston-daily-rotate-file';
         return {
           transports: [
             consoleTransports,
+            consoleErrorTransports,
             ...(configService.get(LOG_ENUM.LOG_ON)
               ? [dailyWarnTransports, dailyInfoTransports]
               : []),
