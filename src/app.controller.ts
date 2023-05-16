@@ -1,13 +1,24 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Logger,
+  Inject,
+  LoggerService,
+} from '@nestjs/common';
 import { AppService } from './app.service';
-import { Logger } from 'nestjs-pino';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly logger: Logger,
-  ) {}
+    @Inject(WINSTON_MODULE_NEST_PROVIDER)
+    private readonly logger: LoggerService,
+  ) {
+    this.logger.log('app controller init');
+  }
 
   @Get()
   getHello(): string {

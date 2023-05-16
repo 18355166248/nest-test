@@ -4,6 +4,7 @@ import { HttpResponseInterceptor } from './interceptor/response/response.interce
 import { HttpFilterFilter } from './filter/http-filter/http-filter.filter';
 import { PiTestPipe } from './pipe/pi-test/pi-test.pipe';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/api-docs', app, document);
+
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   await app.listen(3000);
 }

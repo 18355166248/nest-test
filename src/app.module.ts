@@ -14,11 +14,12 @@ import { One2 } from './resource/one2/entities/one2.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './configuration';
 import * as Joi from 'joi';
-import { LoggerModule } from 'nestjs-pino';
+// import { LoggerModule } from 'nestjs-pino';
+import { LogsModule } from './logs/logs.module';
 
 @Module({
   imports: [
-    LoggerModule.forRoot(),
+    // LoggerModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
@@ -56,7 +57,8 @@ import { LoggerModule } from 'nestjs-pino';
     UserModule,
     PhotoModule,
     One1Module, // 一对一
-    One2Module, // 一对一
+    One2Module,
+    LogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

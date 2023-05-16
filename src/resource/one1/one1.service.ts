@@ -18,8 +18,6 @@ export class One1Service {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
 
-    console.log(333);
-
     const one1 = new One1();
     one1.gender = createOne1Dto.gender;
 
